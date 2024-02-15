@@ -1,11 +1,15 @@
-import LottieSection from './components/LottieSection'
+import { BrowserRouter } from 'react-router-dom'
+import AppRouter from './components/AppRouter'
+import Navbar from './components/NavBar'
+
 import './App.css'
 
 function App() {
   return (
-    <>
-      <LottieSection />
-    </>
+    <BrowserRouter>
+      <Navbar />
+      <AppRouter />
+    </BrowserRouter>
   )
 }
 

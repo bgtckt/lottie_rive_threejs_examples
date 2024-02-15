@@ -22,7 +22,7 @@ const LottieSection = () => {
   const catLoadingRef = useRef<LottieRefCurrentProps | null>(null);
 
   return (
-    <div style={{ width: 1440 }}>
+    <>
       <div style={{ display: "flex" }}>
         <ClockAnimation />
 
@@ -52,8 +52,8 @@ const LottieSection = () => {
         <button type="button" onClick={() => catLoadingRef.current?.setSpeed(3)}>speed up</button>
         <button type="button" onClick={() => catLoadingRef.current?.setSpeed(1)}>slow down</button>
       </div>
-    </div >
+    </>
   )
-}
+};
 
 export default LottieSection;
