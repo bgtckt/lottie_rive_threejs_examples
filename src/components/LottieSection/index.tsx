@@ -1,12 +1,14 @@
 import { useRef } from "react";
 import Lottie, { LottieRefCurrentProps, useLottie } from "lottie-react";
-import pleaseWaitAnimation from '../../assets/lottie-animation-1.json';
-import clockAnimation from '../../assets/lottie-animation-2.json';
-import catAnimation from '../../assets/lottie-animation-3.json';
+import DoneAnimation from "./components/DoneAnimation";
+import MoveAnimation from "./components/MoveAnimation";
+import pleaseWaitAnimationData from '../../assets/lottie-animation-1.json';
+import clockAnimationData from '../../assets/lottie-animation-2.json';
+import catAnimationData from '../../assets/lottie-animation-3.json';
 
-const Clock = () => {
+const ClockAnimation = () => {
   const options = {
-    animationData: clockAnimation,
+    animationData: clockAnimationData,
     loop: true,
   };
 
@@ -20,19 +22,29 @@ const LottieSection = () => {
   const catLoadingRef = useRef<LottieRefCurrentProps | null>(null);
 
   return (
-    <div style={{ width: 600 }}>
-      <Lottie
-        lottieRef={pleaseWaitRef}
-        animationData={pleaseWaitAnimation}
-        loop
-        onMouseOver={() => pleaseWaitRef.current?.pause()}
-        onMouseLeave={() => pleaseWaitRef.current?.play()}
-      />
+    <div style={{ width: 1440 }}>
+      <div style={{ display: "flex" }}>
+        <ClockAnimation />
 
-      <div>
+        <Lottie
+          lottieRef={pleaseWaitRef}
+          animationData={pleaseWaitAnimationData}
+          onMouseOver={() => pleaseWaitRef.current?.pause()}
+          onMouseLeave={() => pleaseWaitRef.current?.play()}
+          loop
+        />
+      </div>
+
+      <div style={{ display: "flex", gap: 150 }}>
+        <DoneAnimation />
+
+        <MoveAnimation />
+      </div>
+
+      <div style={{ width: 600, margin: "120px 0 0 300px" }}>
         <Lottie
           lottieRef={catLoadingRef}
-          animationData={catAnimation}
+          animationData={catAnimationData}
           loop
         />
         <button type="button" onClick={() => catLoadingRef.current?.setDirection(-1)}>reverse</button>
@@ -40,8 +52,6 @@ const LottieSection = () => {
         <button type="button" onClick={() => catLoadingRef.current?.setSpeed(3)}>speed up</button>
         <button type="button" onClick={() => catLoadingRef.current?.setSpeed(1)}>slow down</button>
       </div>
-
-      <Clock />
     </div >
   )
 }
