@@ -12,6 +12,7 @@ const Navbar = () => (
   <div style={style}>
     <Link to='/'>Lottie</Link>
     <Link to='/rive'>Rive</Link>
+    <Link to='/3d'>TheeJS</Link>
   </div>
 );
 
