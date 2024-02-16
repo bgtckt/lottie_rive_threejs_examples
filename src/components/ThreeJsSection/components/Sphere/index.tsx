@@ -1,14 +1,12 @@
 import { useRef } from "react";
-import { BufferGeometry, Material, Mesh, NormalBufferAttributes, Object3DEventMap } from "three";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three/src/loaders/TextureLoader.js";
+import { MeshStructure } from "../../types";
 
 import texture from "/rock_texture.jpg";
 
-type MeshStructureType = Mesh<BufferGeometry<NormalBufferAttributes>, Material | Material[], Object3DEventMap>;
-
 const Sphere = () => {
-  const meshRef = useRef<MeshStructureType | null>(null);
+  const meshRef = useRef<MeshStructure | null>(null);
   const textureMap = useLoader(TextureLoader, texture);
 
   useFrame(() => {
