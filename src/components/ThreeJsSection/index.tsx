@@ -9,11 +9,23 @@ import SpaceSuit from "./components/SpaceSuit";
 import SpaceStation from "./components/SpaceStation";
 import { TextureLoader } from "three/src/loaders/TextureLoader.js";
 
+import skyTexture from "/night_sky_texture.jpg";
 import soilTexture from "/soil_texture.jpg";
 
 import "./index.module.css";
 
 type Model = "planet" | "spaceScene";
+
+const Sky = () => {
+  const skyTextureMap = useLoader(TextureLoader, skyTexture);
+
+  return (
+    <mesh rotation={[4.84, 0, 0]} position={[0, -4, 0]}>
+      <sphereGeometry args={[15]} />
+      <meshStandardMaterial map={skyTextureMap} side={DoubleSide} />
+    </mesh>
+  )
+}
 
 const ThreeJsSection = () => {
   const [activeModel, setActiveModel] = useState<Model>("planet");
@@ -22,8 +34,10 @@ const ThreeJsSection = () => {
 
   return (
     <div>
-      <button type="button" onClick={() => setActiveModel("planet")}>Planet</button>
-      <button type="button" onClick={() => setActiveModel("spaceScene")}>Space scene</button>
+      <div style={{ marginBottom: 32 }}>
+        <button type="button" onClick={() => setActiveModel("planet")}>Planet</button>
+        <button type="button" onClick={() => setActiveModel("spaceScene")}>Space scene</button>
+      </div>
       <Canvas
         camera={{
           fov: 90,
@@ -40,14 +54,15 @@ const ThreeJsSection = () => {
 
         {activeModel === "spaceScene" && (
           <>
-            <directionalLight position={[1, 10, 1]} intensity={3} />
-            <ambientLight intensity={5} />
+            <directionalLight position={[1, 5, 1]} intensity={3} />
+            <hemisphereLight intensity={2} />
             <SpaceStation />
             <Harvester />
             <Droid />
             <SpaceSuit />
+            <Sky />
             <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-              <planeGeometry args={[10, 10]} />
+              <circleGeometry args={[14]} />
               <meshStandardMaterial map={groundTextureMap} side={DoubleSide} />
             </mesh>
           </>
