@@ -27,10 +27,19 @@ const Sky = () => {
   )
 }
 
+const Ground = () => {
+  const groundTextureMap = useLoader(TextureLoader, soilTexture);
+
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
+      <circleGeometry args={[14]} />
+      <meshStandardMaterial map={groundTextureMap} side={DoubleSide} />
+    </mesh>
+  )
+}
+
 const ThreeJsSection = () => {
   const [activeModel, setActiveModel] = useState<Model>("planet");
-
-  const groundTextureMap = useLoader(TextureLoader, soilTexture);
 
   return (
     <div>
@@ -61,10 +70,7 @@ const ThreeJsSection = () => {
             <Droid />
             <SpaceSuit />
             <Sky />
-            <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-              <circleGeometry args={[14]} />
-              <meshStandardMaterial map={groundTextureMap} side={DoubleSide} />
-            </mesh>
+            <Ground />
           </>
         )}
         <OrbitControls />
